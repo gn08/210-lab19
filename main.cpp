@@ -8,9 +8,9 @@ struct Review{
     Review* next;
 };
 
-void add_at_head(Review*& head, Review*& tail, double rating, const string& comments);
-void add_at_tail(Review*& head, Review*& tail, double rating, const string& comments);
-void display_review(Review*& head);
+void display_reviews() const; 
+void add_review(const string& comments);
+void display_review();
 
 int main() {
     Review* head = nullptr;
@@ -52,7 +52,7 @@ int main() {
 //display_review() outputs reviews and gets average rating
 // arguments: head: reference to first node
 // returns: void
-void display_review(Review*& head){
+void display_review(){
     Review* temp = head;
     int count = 1;
     double total_rating = 0.0;
