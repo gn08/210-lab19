@@ -54,7 +54,7 @@ Movie::~Movie() {
         //clean memory
         delete temp;
     }
-};
+}
 
 double Movie::generate_random_rating() const {
     //random rating between 1.0 and 5.0
