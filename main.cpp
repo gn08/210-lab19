@@ -8,6 +8,8 @@ struct Review{
     Review* next;
 };
 
+Movie::Movie(const string& movie_title);
+Movie::~Movie();
 void display_reviews() const; 
 void add_review(const string& comments);
 void display_review();
@@ -49,6 +51,17 @@ int main() {
     return 0;
 }
 
+void Movie::add_review(const string& comments) {
+    Review* new_node = new Review;
+    new_node->rating = generate_random_rating();
+    new_node->comments = comments;
+    new_node->next = head;
+    head = new_node;
+    if (!tail) {
+        tail = head;
+    }
+}
+
 //display_review() outputs reviews and gets average rating
 // arguments: head: reference to first node
 // returns: void
@@ -87,7 +100,7 @@ class Movie{
     double generate_random_rating() const;
 };
 
-Movie::Movie() {
+Movie::Movie(const string& movie_title) {
     title = movie_title;
     head = nullptr;
     tail = nullptr;
