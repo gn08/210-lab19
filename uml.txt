@@ -1,0 +1,21 @@
++-------------------+
+|       Review      |
++-------------------+
+| - rating: double  |
+| - comments: string|
+| - next: Review*   |
++-------------------+
+
++-------------------+
+|       Movie       |
++-------------------+
+| - title: string   |
+| - head: Review*   |
+| - tail: Review*   |
++-------------------+
+| + Movie(string)   |
+| + ~Movie()        |
+| + add_review(string) |
+| + display_reviews() const |
+| + generate_random_rating() const |
++-------------------+
