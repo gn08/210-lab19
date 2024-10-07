@@ -108,6 +108,7 @@ int main() {
     vector<Movie> movies;
     movies.push_back(Movie("movie 1"));
     movies.push_back(Movie("movie 2"));
+    vector<string> review_comments;
 //open file
     ifstream file("review.txt");
      while (getline(file, comments)) {
