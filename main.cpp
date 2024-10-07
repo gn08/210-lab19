@@ -49,39 +49,6 @@ int main() {
     return 0;
 }
 
-//add_at_head() adds review node at head of list
-// arguments: head- reference to first node, tail- reference to last node
-//            rating- rating in new node, comments- review comments
-//returns: void
-void add_at_head(Review*& head, Review*& tail, double rating, const string& comments){
-    Review* new_node = new Review;
-    new_node->rating = rating;
-    new_node->comments = comments;
-    new_node-> next = head;
-    head = new_node;
-    if (!tail){
-        tail = head;
-    }
-}
-
-//add_at_tail() adds review node at tail of list
-// arguments: head- reference to first node, tail- reference to last node
-//            rating- rating in new node, comments- review comments
-//returns: void
-void add_at_tail(Review*& head, Review*& tail, double rating, const string& comments){
-    Review* new_node = new Review;
-    new_node->rating = rating;
-    new_node->comments = comments;
-    if(!head){
-        head = new_node;
-        tail = new_node;
-    } else {
-        tail -> next = new_node;
-        tail = new_node;
-    }
-
-}
-
 //display_review() outputs reviews and gets average rating
 // arguments: head: reference to first node
 // returns: void
@@ -112,4 +79,24 @@ class Movie{
     string title;
     Review* head;
     Review* tail;
+
+    public:
+    Movie(const string& movie_title);
+    void add_review(const string& comments);
+    void display_reviews() const;
+    double generate_random_rating() const;
+};
+
+Movie::Movie() {
+    title = movie_title;
+    head = nullptr;
+    tail = nullptr;
+}
+
+Movie::~Movie() {
+    while (head) {
+        Review* temp = head;
+        head = head->next;
+        delete temp;
+    }
 }
