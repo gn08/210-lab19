@@ -26,10 +26,6 @@ public:
     double generate_random_rating() const;
 };
 
-void display_reviews() const; 
-void add_review(const string& comments);
-double generate_random_rating() const;
-
 Movie::Movie(const string& movie_title) {
     title = movie_title;
     head = nullptr;
@@ -62,7 +58,7 @@ void Movie::add_review(const string& comments) {
 //display_review() outputs reviews and gets average rating
 // arguments: head: reference to first node
 // returns: void
-void display_review(){
+void Movie::display_reviews() const{
     Review* temp = head;
     int count = 1;
     double total_rating = 0.0;
@@ -87,6 +83,7 @@ void display_review(){
 int main() {
     string comments;
     srand(static_cast<unsigned int>(time(0)));
+
     vector<Movie> movies;
     movies.push_back(Movie("movie 1"));
     movies.push_back(Movie("movie 2"));
@@ -100,7 +97,7 @@ int main() {
     }
 
     cout << "Movie 1 review: " << endl;
-    mvoies[0].display_reviews();
+    movies[0].display_reviews();
     cout << "Movie 2 review: " << endl;
     movies[1].display_reviews();
 
