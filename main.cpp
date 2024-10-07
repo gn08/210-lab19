@@ -8,45 +8,46 @@ struct Review{
     Review* next;
 };
 
+class Movie{
+    private:
+        string title;
+        Review* head;
+        Review* tail;
+
+    public:
+        Movie(const string& movie_title);
+        ~Movie(); 
+        void add_review(const string& comments);
+        void display_reviews() const;
+        double generate_random_rating() const;
+};
+
 Movie::Movie(const string& movie_title);
 Movie::~Movie();
 void display_reviews() const; 
 void add_review(const string& comments);
-void display_review();
+double generate_random_rating() const;
 
-int main() {
-    Review* head = nullptr;
-    Review* tail = nullptr;
-    int choice;
-    double rating;
-    string comments;
+Movie::Movie(const string& movie_title) {
+    title = movie_title;
+    head = nullptr;
+    tail = nullptr;
+}
 
-    cout << "Which linked list method should we use?" << endl;
-    cout << "[1] New nodes are added at the head of the linked list";
-    cout << "[2] New nodes are added at the tail of the linked list";
-    cout << "Choice: ";
-    cin >> choice;
-    cin.ignore();
-
-    cout << "Enter review rating";
-    cin >> rating;
-    cin.ignore();
-    cout << "Enter comments: ";
-    getline(cin, comments);
-
-    if (choice == 1){
-        add_at_head(head, tail, rating, comments);
-    } else{
-        add_at_tail(head, tail, rating, comments);
-    }
-
-    cout  << "Outputting all reviews:";
-    display_review(head);
-    while (head){
+Movie::~Movie() {
+    while (head) {
         Review* temp = head;
-        head = head-> next;
+        head = head->next;
         delete temp;
     }
+};
+
+
+int main() {
+    srand(static_cast<unsigned int>(time(0)));
+    vector<Movie> movies;
+    movies.push_back(Movie("movie 1"));
+    movies.push_back(Movie("movie 2"));
 
     return 0;
 }
@@ -87,29 +88,6 @@ void display_review(){
     }
 }
 
-class Movie{
-    private:
-    string title;
-    Review* head;
-    Review* tail;
-
-    public:
-    Movie(const string& movie_title);
-    void add_review(const string& comments);
-    void display_reviews() const;
-    double generate_random_rating() const;
-};
-
-Movie::Movie(const string& movie_title) {
-    title = movie_title;
-    head = nullptr;
-    tail = nullptr;
-}
-
-Movie::~Movie() {
-    while (head) {
-        Review* temp = head;
-        head = head->next;
-        delete temp;
-    }
+double generate_random_rating() const {
+    return (rand() % 41 + 10) / 10.0;
 }
