@@ -1,5 +1,9 @@
 #include <iostream>
 #include <string>
+#include <vector>
+#include <ctime>
+#include <cstdlib>
+#include <fstream>
 using namespace std;
 
 struct Review{
@@ -9,21 +13,19 @@ struct Review{
 };
 
 class Movie{
-    private:
-        string title;
-        Review* head;
-        Review* tail;
+private:
+    string title;
+    Review* head;
+    Review* tail;
 
-    public:
-        Movie(const string& movie_title);
-        ~Movie(); 
-        void add_review(const string& comments);
-        void display_reviews() const;
-        double generate_random_rating() const;
+public:
+    Movie(const string& movie_title);
+    ~Movie(); 
+    void add_review(const string& comments);
+    void display_reviews() const;
+    double generate_random_rating() const;
 };
 
-Movie::Movie(const string& movie_title);
-Movie::~Movie();
 void display_reviews() const; 
 void add_review(const string& comments);
 double generate_random_rating() const;
@@ -42,14 +44,8 @@ Movie::~Movie() {
     }
 };
 
-
-int main() {
-    srand(static_cast<unsigned int>(time(0)));
-    vector<Movie> movies;
-    movies.push_back(Movie("movie 1"));
-    movies.push_back(Movie("movie 2"));
-
-    return 0;
+double Movie::generate_random_rating() const {
+    return (rand() % 41 + 10) / 10.0;
 }
 
 void Movie::add_review(const string& comments) {
@@ -88,6 +84,25 @@ void display_review(){
     }
 }
 
-double generate_random_rating() const {
-    return (rand() % 41 + 10) / 10.0;
+int main() {
+    string comments;
+    srand(static_cast<unsigned int>(time(0)));
+    vector<Movie> movies;
+    movies.push_back(Movie("movie 1"));
+    movies.push_back(Movie("movie 2"));
+    ifstream file("review.txt");
+    
+    while (getline(file, comments)) {
+        movies[0].add_review(comments);
+        if (getline(file, comments)) {
+            movies[1].add_review(comments);
+        }
+    }
+
+    cout << "Movie 1 review: " << endl;
+    mvoies[0].display_reviews();
+    cout << "Movie 2 review: " << endl;
+    movies[1].display_reviews();
+
+    return 0;
 }
